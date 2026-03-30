@@ -1,7 +1,7 @@
 {
   "name": "Дія",
   "short_name": "Дія",
-  "start_url": "/main",
+  "start_url": "/main.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
