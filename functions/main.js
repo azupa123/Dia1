@@ -3,11 +3,18 @@ export async function onRequestGet({ request }) {
   const isMobile = /iphone|ipad|ipod|android/i.test(ua);
 
   if (isMobile) {
-    return new Response(null, {
-      status: 302,
+    const upstreamUrl = new URL("/main.html", request.url);
+    const upstreamRes = await fetch(upstreamUrl.toString(), {
       headers: {
-        "Location": new URL("/main.html", request.url).toString(),
+        "User-Agent": ua,
       },
+    });
+
+    const headers = new Headers(upstreamRes.headers);
+    headers.set("Cache-Control", "no-store");
+    return new Response(upstreamRes.body, {
+      status: upstreamRes.status,
+      headers,
     });
   }
 
