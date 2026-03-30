@@ -4,11 +4,7 @@ export async function onRequestGet({ request }) {
 
   if (isMobile) {
     const upstreamUrl = new URL("/main.html", request.url);
-    const upstreamRes = await fetch(upstreamUrl.toString(), {
-      headers: {
-        "User-Agent": ua,
-      },
-    });
+    const upstreamRes = await fetch(upstreamUrl.toString());
 
     const headers = new Headers(upstreamRes.headers);
     headers.set("Cache-Control", "no-store");
